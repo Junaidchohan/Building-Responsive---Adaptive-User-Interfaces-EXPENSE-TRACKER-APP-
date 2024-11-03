@@ -1,10 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:responsive_and_adaptive_ui/model/expense.dart';
 import 'package:responsive_and_adaptive_ui/widgets/expenses_list/chart/chart.dart';
 import 'package:responsive_and_adaptive_ui/widgets/expenses_list/expenses_list.dart';
 import 'package:responsive_and_adaptive_ui/widgets/new_expense.dart';
-
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -78,10 +76,6 @@ class _ExpensesState extends State<Expenses> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
-    print(width);
-    print(height);
-
 
     Widget mainContent = const Center(
       child: Text('No expense found. Start adding some!'),
@@ -104,12 +98,19 @@ class _ExpensesState extends State<Expenses> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          Chart(expenses: _registerExpense),
-          Expanded(child: mainContent),
-        ],
-      ),
+      body: width < 600
+          ? Column(
+              children: [
+                Chart(expenses: _registerExpense),
+                Expanded(child: mainContent),
+              ],
+            )
+          : Row(
+              children: [
+                Expanded(child: Chart(expenses: _registerExpense)),
+                Expanded(child: mainContent),
+              ],
+            ),
     );
   }
 }
