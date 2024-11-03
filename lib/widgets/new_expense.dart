@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:responsive_and_adaptive_ui/model/expense.dart';
 
 class NewExpense extends StatefulWidget {
@@ -77,7 +78,13 @@ class _NewExpenseState extends State<NewExpense> {
   @override
   Widget build(BuildContext context) {
    final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
-    return SizedBox(
+   return LayoutBuilder(builder: (ctx, Constraints){
+    print(Constraints.maxWidth);
+    print(Constraints.minWidth);
+    print(Constraints.maxHeight);
+    print(Constraints.minHeight);
+
+     return SizedBox(
       height: double.infinity,
       child: SingleChildScrollView(
         child: Padding(
@@ -173,5 +180,7 @@ class _NewExpenseState extends State<NewExpense> {
         ),
       ),
     );
+   });
+
   }
 }
